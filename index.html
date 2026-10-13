@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Henrique Silva — Vídeo, UGC e Filme</title>
+<title>Henrique Silva — Vídeo e Filme</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Space+Mono&display=swap" rel="stylesheet">
@@ -65,8 +65,8 @@ nav div{display:flex;gap:22px}
 
 /* DESTAQUES */
 .feat{background:var(--laranja);color:var(--cafe);padding-block:clamp(40px,6vw,90px) 40px;position:relative}
-.h-a{font-size:clamp(70px,17vw,280px);--a:62;--b:125}
-.h-b{font-size:clamp(46px,10vw,170px);text-align:right}
+.h-a{font-size:clamp(60px,14.5vw,240px);--a:62;--b:125}
+.h-b{font-size:clamp(40px,8.6vw,146px);text-align:right}
 .intro{max-width:230px;margin:6px 0 40px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(7,1fr)}
 .card{position:relative;overflow:hidden;border:0;padding:0;cursor:pointer;display:block;text-align:left;color:var(--bege);background:var(--cafe)}
@@ -91,7 +91,7 @@ nav div{display:flex;gap:22px}
 
 /* EM FOCO */
 .foco{background:var(--fbg);color:var(--ftx);min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;transition:background .7s,color .7s;overflow:hidden}
-.foco h2{font-size:clamp(60px,15vw,250px);transition:opacity .25s;--x:0}
+.foco h2{font-size:clamp(54px,13vw,215px);transition:opacity .25s;--x:0}
 .meta{display:flex;justify-content:space-between;gap:16px;margin:14px 0 26px}
 .film{background:#1b0f0a;padding-block:6px;color:var(--bege)}
 .strip{display:flex;gap:6px;overflow-x:auto;padding:8px clamp(12px,1.6vw,26px);scrollbar-width:none}
@@ -107,7 +107,7 @@ nav div{display:flex;gap:22px}
 
 /* SOBRE */
 .sobre{background:var(--fundo);padding-block:clamp(50px,8vw,120px)}
-.sobre .disp{font-size:clamp(70px,19vw,320px)}
+.sobre .disp{font-size:clamp(60px,16vw,270px)}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,100px);margin-top:clamp(50px,8vw,120px);align-items:end}
 .cols p{margin:0;max-width:44ch;font-size:clamp(16px,1.5vw,21px);line-height:1.4;font-weight:400}
 .svc{list-style:none;margin:0;padding:0;border-top:1px solid rgba(233,217,197,.35)}
@@ -117,7 +117,7 @@ nav div{display:flex;gap:22px}
 
 /* CONTATO */
 .contato{background:var(--laranja);color:var(--cafe);padding-block:clamp(40px,6vw,90px) 26px}
-.contato .disp{font-size:clamp(70px,19vw,320px)}
+.contato .disp{font-size:clamp(60px,16vw,270px)}
 .crow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:40px;align-items:flex-end}
 .crow a.mail{font-family:var(--mono);font-size:clamp(14px,1.6vw,22px);border-bottom:2px solid var(--cafe);padding-bottom:4px}
 .crow ul{list-style:none;margin:0;padding:0;display:flex;gap:20px}
@@ -165,6 +165,46 @@ nav div{display:flex;gap:22px}
 .lbf iframe{width:100%;height:100%;border:0}
 .lbyt{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:16px}
 .lbx{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px}
+
+/* nome em duas linhas: HENRIQUE em cima, SILVA embaixo à esquerda */
+.title{display:flex;flex-direction:column;align-items:flex-start;width:max-content}
+.title .row{display:flex;align-items:flex-start;gap:.015em}
+.title .row2{align-self:flex-start;font-size:1em;margin-top:.03em}
+.title .L{display:block;position:relative;overflow:hidden;padding-top:.07em}
+
+/* TRABALHOS EM DESTAQUE — slider em tela cheia (referência Montra) */
+.mont{--ink:#E9D9C5;position:relative;min-height:max(100svh,680px);overflow:hidden;color:var(--ink);transition:color .8s;background:var(--cafe)}
+.mbgs,.mb{position:absolute;inset:0}
+.mb{background:var(--bg);opacity:0;transition:opacity 1s ease}
+.mb.on{opacity:1}
+.mb::before{content:"";position:absolute;left:50%;top:6%;width:min(52vw,640px);height:96%;transform:translateX(-50%);
+ background:radial-gradient(21% 19% at 50% 22%,var(--sil) 97%,transparent 100%),radial-gradient(21% 30% at 56% 30%,var(--sil) 97%,transparent 100%),radial-gradient(48% 36% at 50% 98%,var(--sil) 97%,transparent 100%),radial-gradient(14% 22% at 50% 52%,var(--sil) 97%,transparent 100%);filter:blur(2px)}
+.mlabel{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:3;padding:9px 20px;border-radius:999px;background:rgba(20,10,6,.22);backdrop-filter:blur(8px);color:#E9D9C5;white-space:nowrap}
+.mrow{position:absolute;left:0;right:0;bottom:calc(50% + 14px);z-index:2;display:flex;align-items:flex-end;gap:3vw}
+.mont .mtitle{flex:0 0 auto;margin:0;text-transform:none;font-weight:700;letter-spacing:-.045em;line-height:.88;font-size:clamp(42px,6.6vw,112px);transition:opacity .25s}
+.mmeta{flex:1;display:flex;justify-content:space-between;gap:16px;padding-bottom:.5em}
+.rail{position:absolute;left:0;right:0;top:50%;z-index:2;overflow:hidden;height:min(50%,calc(var(--w)*1.4 + 8px));--w:clamp(112px,15.5vw,236px);touch-action:pan-y}
+.track{display:flex;gap:4px;align-items:flex-start;transition:transform .95s cubic-bezier(.7,0,.2,1);will-change:transform;width:max-content}
+.it{flex:0 0 var(--w);width:var(--w);height:calc(var(--w)*.68);border:0;border-radius:4px;padding:0;cursor:pointer;position:relative;overflow:hidden;transition:height .95s cubic-bezier(.7,0,.2,1),filter .5s;filter:saturate(.85) brightness(.9)}
+.it[aria-pressed=true]{height:calc(var(--w)*1.4);filter:none}
+.it:hover{filter:none}
+.it span{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:#E9D9C5}
+.mprog{position:absolute;left:0;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:3;display:flex;align-items:center;gap:14px;color:var(--ink);transition:color .8s}
+.mprog i{width:clamp(140px,20vw,260px);height:1px;background:currentColor;opacity:.9;position:relative;display:block}
+.mprog i b{position:absolute;left:0;top:-1px;height:3px;background:currentColor;transition:width .6s}
+.mall{position:absolute;right:clamp(12px,1.6vw,26px);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:3;color:var(--ink);transition:color .8s,background .25s}
+.mall:hover{background:var(--ink);color:var(--cafe)}
+@media (max-width:760px){
+  .mrow{flex-direction:column;align-items:flex-start;gap:10px}
+  .mmeta{width:100%;padding:0}
+  .mmeta span:nth-child(1){display:none}
+  .mont .mtitle{font-size:clamp(38px,12vw,64px)}
+  .rail{--w:clamp(104px,30vw,170px)}
+}
+.track.nj,.track.nj .it{transition:none!important}
+@media (prefers-reduced-motion:reduce){.mb,.track,.it{transition:none!important}}
+
+
 </style>
 </head>
 <body>
@@ -184,22 +224,23 @@ nav div{display:flex;gap:22px}
   <div>
     <div class="titlewrap">
       <h1 class="title" id="title" aria-label="Henrique Silva">
-        <span class="L bar" aria-hidden="true"><b style="--a:125;--d:.05s">H</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:62;--d:.12s">E</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:100;--d:.19s">N</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:80;--d:.26s">R</b></span>
-        <span class="L bar" aria-hidden="true"><b style="--a:62;--d:.33s">I</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:125;--d:.4s">Q</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:75;--d:.47s">U</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:62;--d:.54s">E</b></span>
-        <span class="gap" aria-hidden="true"></span>
-        <span class="L bar" aria-hidden="true"><b style="--a:110;--d:.61s">S</b></span>
-        <span class="L" aria-hidden="true"><b style="--a:62;--d:.68s">I</b></span>
-        <span class="stack" aria-hidden="true">
-          <span class="L"><b style="--a:125;--d:.75s">L</b></span>
-          <span class="L"><b style="--a:62;--d:.82s">V</b></span>
+        <span class="row row1">
+          <span class="L bar" aria-hidden="true"><b style="--a:125;--d:.05s">H</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:62;--d:.12s">E</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:100;--d:.19s">N</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:80;--d:.26s">R</b></span>
+          <span class="L bar" aria-hidden="true"><b style="--a:62;--d:.33s">I</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:125;--d:.4s">Q</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:75;--d:.47s">U</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:62;--d:.54s">E</b></span>
         </span>
-        <span class="L" aria-hidden="true"><b style="--a:95;--d:.89s">A</b></span>
+        <span class="row row2">
+          <span class="L bar" aria-hidden="true"><b style="--a:110;--d:.7s">S</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:62;--d:.77s">I</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:125;--d:.84s">L</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:62;--d:.91s">V</b></span>
+          <span class="L" aria-hidden="true"><b style="--a:95;--d:.98s">A</b></span>
+        </span>
       </h1>
     </div>
     <div class="mid pad">
@@ -209,7 +250,7 @@ nav div{display:flex;gap:22px}
     </div>
   </div>
   <div>
-    <div class="hfoot pad mono"><span>Edição · Filmagem · UGC<br>Brasil</span><p>Editor de vídeo e criador de conteúdo. Roteiro, captação e finalização para marcas e criadores, do conceito à entrega.</p></div>
+    <div class="hfoot pad mono"><span>Edição · Filmagem · Direção<br>Brasil</span><p>Editor de vídeo e criador de conteúdo. Roteiro, captação e finalização para marcas e criadores, do conceito à entrega.</p></div>
     <div class="filmedge">
       <div class="perf"></div>
       <div class="ruler mono"><span>2.76:1</span><span>2.39:1</span><span>2:1</span><span>1.85:1</span><span>1.78:1</span><span>1.33:1</span><span>1:1</span></div>
@@ -218,40 +259,16 @@ nav div{display:flex;gap:22px}
   </div>
 </header>
 
-<section class="feat" id="trabalhos">
-  <div class="pad">
-    <h2 class="disp play h-a">Trabalhos</h2>
-    <h2 class="disp play h-b" style="--a:113;--b:70">em destaque</h2>
-    <p class="intro">Fashion film, UGC, videoclipe e motion: uma seleção do que filmei e editei.</p>
-    <div class="grid">
-      <button class="card" data-i="0"><div class="art a1"></div><span class="k mono"><span>01</span><span>Fashion film</span></span><span class="t"><b>Amanda crepúsculo</b><span class="mono">2026</span></span></button>
-      <button class="card" data-i="1"><div class="art a2"></div><span class="k mono"><span>02</span><span>UGC</span></span><span class="t"><b>Campanha de marca</b><span class="mono">2026</span></span></button>
-      <button class="card" data-i="2"><div class="art a3"></div><span class="k mono"><span>03</span><span>Videoclipe</span></span><span class="t"><b>Título do projeto</b><span class="mono">2025</span></span></button>
-      <button class="card" data-i="3"><div class="art a4"></div><span class="k mono"><span>04</span><span>Motion</span></span><span class="t"><b>Título do projeto</b><span class="mono">2025</span></span></button>
-    </div>
-    <div class="viewall"><a class="pill" href="#contato"><small>nice</small>Ver tudo<small>stuff</small></a></div>
+<section class="mont" id="trabalhos" aria-label="Trabalhos em destaque">
+  <div class="mbgs" id="mbgs" aria-hidden="true"></div>
+  <div class="mlabel"><span class="mono">Trabalhos em destaque</span></div>
+  <div class="mrow pad">
+    <h2 class="disp play mtitle" id="ftitle">Amanda<br>crepúsculo</h2>
+    <div class="mmeta mono"><span>Por Henrique Silva</span><span id="fcat">Fashion film</span><span id="fyear">2026</span><span>Brasil</span></div>
   </div>
-</section>
-
-<section class="foco" id="foco">
-  <div class="pad">
-    <h2 class="disp play" id="ftitle">Amanda<br>crepúsculo</h2>
-    <div class="meta mono"><span>Por Henrique Silva</span><span id="fcat">Fashion film</span><span id="fyear">2026</span><span>Brasil</span></div>
-  </div>
-  <div class="film">
-    <div class="perf"></div>
-    <div class="strip" id="strip" role="group" aria-label="Projetos">
-      <button aria-pressed="true" data-i="0" aria-label="Amanda crepúsculo" style="background:linear-gradient(135deg,#e0a070,#3a1f14)"><span>12</span></button>
-      <button aria-pressed="false" data-i="1" aria-label="Campanha de marca" style="background:linear-gradient(135deg,#c66a40,#24150f)"><span>12A</span></button>
-      <button aria-pressed="false" data-i="2" aria-label="Videoclipe" style="background:linear-gradient(135deg,#e9d9c5,#5a3424)"><span>13</span></button>
-      <button aria-pressed="false" data-i="3" aria-label="Motion" style="background:linear-gradient(135deg,#9a4a2a,#1c0f0a)"><span>13A</span></button>
-      <button aria-pressed="false" data-i="4" aria-label="Documentário" style="background:linear-gradient(135deg,#b88a63,#2c1a12)"><span>14</span></button>
-      <button aria-pressed="false" data-i="5" aria-label="Educacional" style="background:linear-gradient(135deg,#d8bfa0,#38251f)"><span>14A</span></button>
-    </div>
-    <div class="perf"></div>
-    <div class="edge mono"><span>35MM</span><span>▸ 5219</span><span>▸ 12 ▸ 12A ▸ 13 ▸ 13A ▸ 14 ▸ 14A</span></div>
-  </div>
-  <div class="prog pad mono"><span id="pn">01</span><i><b id="pb" style="width:17%"></b></i><span>06</span></div>
+  <div class="rail" id="rail" role="group" aria-label="Projetos"><div class="track" id="track"></div></div>
+  <div class="mprog pad mono"><span id="pn">01</span><i><b id="pb"></b></i><span id="pt">06</span></div>
+  <a class="pill mall" href="#contato">Ver tudo</a>
 </section>
 
 <section class="sobre" id="sobre">
@@ -261,7 +278,7 @@ nav div{display:flex;gap:22px}
       <p>Sou editor de vídeo e criador de conteúdo no Brasil. Filmo, roteirizo e edito com atenção ao ritmo, à luz e ao som. Cada projeto começa na história e termina em uma entrega pronta para publicar.</p>
       <ul class="svc">
         <li>Edição e finalização <span>Premiere, After Effects</span></li>
-        <li>Roteiro e direção <span>UGC, fashion film</span></li>
+        <li>Roteiro e direção <span>fashion film, comercial</span></li>
         <li>Captação <span>imagem e áudio</span></li>
         <li>Motion graphics <span>títulos e animação</span></li>
       </ul>
@@ -339,34 +356,79 @@ const T=document.getElementById('title');
 function fit(){
   T.style.fontSize='100px';
   const w=T.parentElement.clientWidth-parseFloat(getComputedStyle(T.parentElement).paddingInline)*2;
-  T.style.fontSize=(100*w/T.scrollWidth)+'px';
+  T.style.fontSize=(92*w/T.querySelector('.row1').offsetWidth)+'px';
   T.classList.add('ready');
 }
 (document.fonts?document.fonts.ready:Promise.resolve()).then(fit);
 addEventListener('resize',fit);
 
-/* projeto em foco */
-const P=[
- ["Amanda<br>crepúsculo","Fashion film","2026","var(--bege)","var(--cafe)"],
- ["Campanha<br>de marca","UGC","2026","var(--cafe)","var(--bege)"],
- ["Título do<br>projeto","Videoclipe","2025","var(--laranja)","var(--cafe)"],
- ["Título do<br>projeto","Motion","2025","var(--bege)","var(--cafe)"],
- ["Título do<br>projeto","Documentário","2024","var(--cafe)","var(--bege)"],
- ["Título do<br>projeto","Educacional","2024","var(--laranja)","var(--cafe)"]
+/* trabalhos em destaque: slider estilo Montra, em loop infinito */
+const PJ=[
+ {t:"Amanda<br>crepúsculo",c:"Fashion film",y:"2026",bg:"#C66A40",sil:"#38251F",ink:"#E9D9C5",g:"linear-gradient(135deg,#e0a070,#3a1f14)"},
+ {t:"Campanha<br>de marca",c:"Comercial",y:"2026",bg:"#38251F",sil:"#C66A40",ink:"#E9D9C5",g:"linear-gradient(135deg,#c66a40,#24150f)"},
+ {t:"Título do<br>projeto",c:"Videoclipe",y:"2025",bg:"#E9D9C5",sil:"#38251F",ink:"#38251F",g:"linear-gradient(135deg,#e9d9c5,#5a3424)"},
+ {t:"Título do<br>projeto",c:"Motion",y:"2025",bg:"#8a3f22",sil:"#1b0f0a",ink:"#E9D9C5",g:"linear-gradient(135deg,#9a4a2a,#1c0f0a)"},
+ {t:"Título do<br>projeto",c:"Documentário",y:"2024",bg:"#24150f",sil:"#7a4a30",ink:"#E9D9C5",g:"linear-gradient(135deg,#b88a63,#2c1a12)"},
+ {t:"Título do<br>projeto",c:"Institucional",y:"2024",bg:"#C66A40",sil:"#E9D9C5",ink:"#38251F",g:"linear-gradient(135deg,#d8bfa0,#38251f)"}
 ];
-const f=document.getElementById('foco'),t=document.getElementById('ftitle');
-function show(i){
-  const p=P[i];
-  t.style.opacity=0;
-  setTimeout(()=>{t.innerHTML=p[0];play(t);t.style.opacity=1},200);
-  fcat.textContent=p[1];fyear.textContent=p[2];
-  f.style.setProperty('--fbg',p[3]);f.style.setProperty('--ftx',p[4]);
-  pn.textContent=String(i+1).padStart(2,'0');
-  pb.style.width=((i+1)/P.length*100)+'%';
-  document.querySelectorAll('#strip button').forEach((b,k)=>b.setAttribute('aria-pressed',k===i));
+const N=PJ.length,SETS=5,HOME=2;
+const mont=document.getElementById('trabalhos'),tt=document.getElementById('ftitle');
+let pos=HOME*N,cur=0;
+PJ.forEach((p,i)=>{
+  const b=document.createElement('div');b.className='mb'+(i?'':' on');
+  b.style.setProperty('--bg',p.bg);b.style.setProperty('--sil',p.sil);mbgs.append(b);
+});
+/* a tira é repetida 5 vezes; ao parar, volta sem animação para a cópia do meio */
+for(let k=0;k<SETS*N;k++){
+  const p=PJ[k%N],it=document.createElement('button');
+  it.className='it';it.type='button';it.style.background=p.g;
+  it.setAttribute('aria-label',p.t.replace(/<br>/g,' '));
+  if(k>=N*HOME&&k<N*(HOME+1)){}else it.setAttribute('tabindex','-1');
+  it.innerHTML='<span>'+String(k%N+1).padStart(2,'0')+'</span>';
+  it.addEventListener('click',()=>move(k-pos));
+  track.append(it);
 }
-document.querySelectorAll('#strip button').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.i)));
-document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',()=>{show(+c.dataset.i);f.scrollIntoView({behavior:'smooth'})}));
+pt.textContent=String(N).padStart(2,'0');
+function center(){
+  const it=track.children[pos];
+  track.style.transform='translateX('+(rail.clientWidth/2-(it.offsetLeft+it.offsetWidth/2))+'px)';
+}
+function mark(){[...track.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===pos))}
+function ui(first){
+  const p=PJ[cur];
+  if(!first){tt.style.opacity=0;setTimeout(()=>{tt.innerHTML=p.t;play(tt);tt.style.opacity=1},220)}
+  fcat.textContent=p.c;fyear.textContent=p.y;
+  mont.style.setProperty('--ink',p.ink);
+  pn.textContent=String(cur+1).padStart(2,'0');
+  pb.style.width=((cur+1)/N*100)+'%';
+  [...mbgs.children].forEach((b,k)=>b.classList.toggle('on',k===cur));
+  mark();
+}
+function norm(){
+  const home=HOME*N+cur;
+  if(pos===home)return;
+  pos=home;track.classList.add('nj');mark();center();void track.offsetWidth;track.classList.remove('nj');
+}
+function move(d){
+  if(!d)return;
+  if(pos<N||pos>=(SETS-1)*N)norm();
+  const prev=cur;
+  pos+=d;cur=((pos%N)+N)%N;
+  center();
+  if(cur!==prev)ui();else mark();
+}
+track.addEventListener('transitionend',e=>{if(e.target===track&&e.propertyName==='transform')norm()});
+ui(true);center();
+addEventListener('resize',center);
+(document.fonts?document.fonts.ready:Promise.resolve()).then(center);
+addEventListener('keydown',e=>{
+  if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+  const r=mont.getBoundingClientRect();
+  if(r.top<innerHeight*.6&&r.bottom>innerHeight*.4)move(e.key==='ArrowRight'?1:-1);
+});
+let sx=null;
+rail.addEventListener('pointerdown',e=>{sx=e.clientX});
+addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>50)move(e.clientX<sx?1:-1);sx=null});
 
 /* showreel: carrega o vídeo, mostra timecode e abre em tela cheia */
 const hero=document.getElementById('hero'),reel=document.getElementById('reel');
@@ -405,6 +467,8 @@ playreel.addEventListener('click',()=>{
   (reel.requestFullscreen||reel.webkitEnterFullscreen||(()=>{})).call(reel);
 });
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){reel.muted=true;reel.controls=false}});
+
+
 </script>
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Showreel">
   <a class="pill lbyt" id="lbyt" target="_blank" rel="noopener">Abrir no YouTube</a>
