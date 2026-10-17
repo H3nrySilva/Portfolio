@@ -119,7 +119,15 @@ nav div{display:flex;gap:22px}
 .contato{background:var(--laranja);color:var(--cafe);padding-block:clamp(40px,6vw,90px) 26px}
 .contato .disp{font-size:clamp(60px,16vw,270px)}
 .crow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:40px;align-items:flex-end}
-.crow a.mail{font-family:var(--mono);font-size:clamp(14px,1.6vw,22px);border-bottom:2px solid var(--cafe);padding-bottom:4px}
+.crow a.mail,.crow a.wpp{display:inline-flex;align-items:center;justify-content:center;width:clamp(64px,6vw,92px);height:clamp(64px,6vw,92px);border:2px solid var(--cafe);border-radius:50%;transition:background .25s,color .25s}
+.crow a.mail svg,.crow a.wpp svg{width:42%;height:42%}
+.crow a.mail:hover{background:var(--cafe);color:var(--laranja)}
+.crow a.mail svg{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.crow a.mail:hover svg{transform:rotate(-8deg) scale(1.1)}
+.crow a.wpp:hover{background:var(--cafe);color:var(--laranja)}
+.crow a.wpp svg{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.crow a.wpp:hover svg{transform:scale(1.12)}
+.icons{display:flex;gap:12px}
 .crow ul{list-style:none;margin:0;padding:0;display:flex;gap:20px}
 .fine{display:flex;justify-content:space-between;margin-top:56px;opacity:.75}
 
@@ -192,6 +200,36 @@ nav div{display:flex;gap:22px}
 .mprog{position:absolute;left:0;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:3;display:flex;align-items:center;gap:14px;color:var(--ink);transition:color .8s}
 .mprog i{width:clamp(140px,20vw,260px);height:1px;background:currentColor;opacity:.9;position:relative;display:block}
 .mprog i b{position:absolute;left:0;top:-1px;height:3px;background:currentColor;transition:width .6s}
+.mplay{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:3;color:var(--ink);transition:color .8s,background .25s}
+/* painel de informações do trabalho */
+.info{position:fixed;inset:0;z-index:65;visibility:hidden;transition:visibility 0s .7s}
+.info.open{visibility:visible;transition:visibility 0s}
+.ibd{position:absolute;inset:0;background:rgba(20,10,6,.55);opacity:0;transition:opacity .7s}
+.info.open .ibd{opacity:1}
+.ipn{position:absolute;top:0;right:0;bottom:0;width:min(500px,100vw);background:var(--bege);color:var(--cafe);transform:translateX(102%);transition:transform .7s cubic-bezier(.7,0,.2,1);overflow-y:auto;display:flex;flex-direction:column;gap:18px;padding:calc(18px + env(safe-area-inset-top,0px)) clamp(18px,2.4vw,34px) calc(28px + env(safe-area-inset-bottom,0px))}
+.info.open .ipn{transform:none}
+.itop{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ix{color:var(--cafe)}
+.ix:hover{background:var(--cafe);color:var(--bege)}
+.iart{position:relative;width:100%;aspect-ratio:16/9;border:0;border-radius:4px;padding:0;cursor:pointer;overflow:hidden;flex:0 0 auto}
+.iart.noplay{cursor:default}
+.iplay{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(36,21,15,.55);color:#E9D9C5;display:grid;place-items:center;font-size:20px;padding-left:4px;backdrop-filter:blur(6px);transition:transform .4s}
+.iart:hover .iplay{transform:scale(1.1)}
+.iart.noplay .iplay{display:none}
+.ipn h3{margin:0;font-weight:900;text-transform:uppercase;font-variation-settings:'wdth' 70;font-size:clamp(46px,7vw,84px);line-height:.86;letter-spacing:-.02em}
+.ipn p{margin:0;font-size:15px;line-height:1.5}
+.ipn dl{margin:0;border-top:1px solid rgba(56,37,31,.35)}
+.ipn dl div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid rgba(56,37,31,.35)}
+.ipn dt,.ipn dd{margin:0;font-family:var(--mono);font-size:11px;text-transform:uppercase}
+.ipn dd{text-align:right;color:#9a4a2a}
+.iact{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+.iact .pill{color:var(--cafe);border-color:var(--cafe)}
+.iact .pill:hover{background:var(--cafe);color:var(--bege)}
+.iact .pill.solid{background:var(--cafe);color:var(--bege)}
+.iact .pill.solid:hover{background:#9a4a2a;border-color:#9a4a2a}
+@media (prefers-reduced-motion:reduce){.ipn,.ibd{transition:none!important}}
+.mplay:hover{background:var(--ink);color:var(--cafe)}
+@media (max-width:760px){.mplay{bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
 .mall{position:absolute;right:clamp(12px,1.6vw,26px);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:3;color:var(--ink);transition:color .8s,background .25s}
 .mall:hover{background:var(--ink);color:var(--cafe)}
 @media (max-width:760px){
@@ -210,7 +248,7 @@ nav div{display:flex;gap:22px}
 <body>
 
 <nav class="mono">
-  <div><a href="#contato">IG</a><a href="#contato">Vimeo</a></div>
+  <div><a href="https://www.instagram.com/h3nrysilva/" target="_blank" rel="noopener">IG</a><a href="https://www.youtube.com/@H3nrysilva" target="_blank" rel="noopener">YouTube</a></div>
   <div><a href="#sobre">Sobre</a><a href="#trabalhos">Trabalhos</a><a href="#contato">Contato</a></div>
 </nav>
 
@@ -268,6 +306,7 @@ nav div{display:flex;gap:22px}
   </div>
   <div class="rail" id="rail" role="group" aria-label="Projetos"><div class="track" id="track"></div></div>
   <div class="mprog pad mono"><span id="pn">01</span><i><b id="pb"></b></i><span id="pt">06</span></div>
+  <button class="pill mplay" id="mplay" type="button">+ Informações</button>
   <a class="pill mall" href="#contato">Ver tudo</a>
 </section>
 
@@ -290,8 +329,8 @@ nav div{display:flex;gap:22px}
   <div class="pad">
     <h2 class="disp play">Vamos<br>conversar</h2>
     <div class="crow">
-      <a class="mail" href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a>
-      <ul class="mono"><li><a href="#">Instagram</a></li><li><a href="#">Vimeo</a></li><li><a href="#">YouTube</a></li></ul>
+      <div class="icons"><a class="mail" href="mailto:henriquesilvacardoso13@gmail.com" aria-label="Enviar e-mail" title="Enviar e-mail"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.2c0-.94.76-1.7 1.7-1.7h18.6c.94 0 1.7.76 1.7 1.7v10.6c0 .94-.76 1.7-1.7 1.7H6.7c-.94 0-1.7-.76-1.7-1.7z"/><path d="M5.6 22.9l8.3-6.8M26.4 22.9l-8.3-6.8"/><path d="M5.8 10.4l8.9 7a2.2 2.2 0 0 0 2.6 0l8.9-7"/></svg></a><a class="wpp" href="https://wa.me/5531996280157" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp" title="Chamar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div>
+      <ul class="mono"><li><a href="https://www.instagram.com/h3nrysilva/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.youtube.com/@H3nrysilva" target="_blank" rel="noopener">YouTube</a></li></ul>
     </div>
     <div class="fine mono"><span>© 2026 Henrique Silva</span><span>Feito no Brasil</span></div>
   </div>
@@ -366,7 +405,7 @@ addEventListener('resize',fit);
 const PJ=[
  {t:"Amanda<br>crepúsculo",c:"Fashion film",y:"2026",bg:"#C66A40",sil:"#38251F",ink:"#E9D9C5",g:"linear-gradient(135deg,#e0a070,#3a1f14)"},
  {t:"Campanha<br>de marca",c:"Comercial",y:"2026",bg:"#38251F",sil:"#C66A40",ink:"#E9D9C5",g:"linear-gradient(135deg,#c66a40,#24150f)"},
- {t:"Título do<br>projeto",c:"Videoclipe",y:"2025",bg:"#E9D9C5",sil:"#38251F",ink:"#38251F",g:"linear-gradient(135deg,#e9d9c5,#5a3424)"},
+ {t:"Bianca<br>Bottrel",c:"Vídeo educativo",y:"2026",yt:"fyfkdn2RsDQ",bg:"#E9D9C5",sil:"#38251F",ink:"#38251F",g:"linear-gradient(135deg,#e9d9c5,#5a3424)"},
  {t:"Título do<br>projeto",c:"Motion",y:"2025",bg:"#8a3f22",sil:"#1b0f0a",ink:"#E9D9C5",g:"linear-gradient(135deg,#9a4a2a,#1c0f0a)"},
  {t:"Título do<br>projeto",c:"Documentário",y:"2024",bg:"#24150f",sil:"#7a4a30",ink:"#E9D9C5",g:"linear-gradient(135deg,#b88a63,#2c1a12)"},
  {t:"Título do<br>projeto",c:"Institucional",y:"2024",bg:"#C66A40",sil:"#E9D9C5",ink:"#38251F",g:"linear-gradient(135deg,#d8bfa0,#38251f)"}
@@ -385,7 +424,7 @@ for(let k=0;k<SETS*N;k++){
   it.setAttribute('aria-label',p.t.replace(/<br>/g,' '));
   if(k>=N*HOME&&k<N*(HOME+1)){}else it.setAttribute('tabindex','-1');
   it.innerHTML='<span>'+String(k%N+1).padStart(2,'0')+'</span>';
-  it.addEventListener('click',()=>move(k-pos));
+  it.addEventListener('click',()=>{if(k===pos)openInfo();else move(k-pos)});
   track.append(it);
 }
 pt.textContent=String(N).padStart(2,'0');
@@ -423,6 +462,7 @@ addEventListener('resize',center);
 (document.fonts?document.fonts.ready:Promise.resolve()).then(center);
 addEventListener('keydown',e=>{
   if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+  if(info.classList.contains('open'))return;
   const r=mont.getBoundingClientRect();
   if(r.top<innerHeight*.6&&r.bottom>innerHeight*.4)move(e.key==='ArrowRight'?1:-1);
 });
@@ -449,13 +489,37 @@ addEventListener('message',e=>{
   if(d&&d.info&&d.info.playerState===1&&!hero.classList.contains('has-video'))hero.classList.add('has-yt');
 });
 reel.addEventListener('loadeddata',()=>{hero.classList.add('has-video');hero.classList.remove('has-yt');ytbg.removeAttribute('src');reel.play().catch(()=>{})});
-function openLB(){
-  lbf.innerHTML=`<iframe src="${yb}?autoplay=1&rel=0&modestbranding=1" title="Showreel" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-  lbyt.href=`https://www.youtube.com/watch?v=${YT}`;lb.hidden=false;lbx.focus();
+function openLB(id){
+  id=id||YT;
+  lbf.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="Vídeo" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  lbyt.href=`https://www.youtube.com/watch?v=${id}`;lb.hidden=false;lbx.focus();
 }
 function closeLB(){lb.hidden=true;lbf.innerHTML=''}
+/* painel de informações: abre ao clicar no trabalho já selecionado */
+const INFO={
+ 2:{d:"Vídeo educativo publicado no canal de Bianca Bottrel. Explica de forma simples e direta como funciona um dos mercados que mais crescem no Brasil para quem cria conteúdo.",f:[["Cliente","Bianca Bottrel"],["Plataforma","YouTube"]]}
+};
+function openInfo(){
+  const p=PJ[cur],x=INFO[cur]||{};
+  imeta.textContent=String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0')+' · '+p.c;
+  itit.textContent=p.t.replace(/<br>/g,' ');
+  idesc.textContent=x.d||'Descrição em breve.';
+  idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||[]).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
+  iart.style.background=p.g;iart.classList.toggle('noplay',!p.yt);
+  iact.innerHTML=p.yt
+    ?'<button class="pill solid" id="iwatch" type="button">▶ Assistir vídeo</button><a class="pill" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+p.yt+'">Abrir no YouTube</a>'
+    :'<a class="pill solid" href="#contato" id="italk">Falar comigo</a>';
+  const w=document.getElementById('iwatch');if(w)w.addEventListener('click',()=>openLB(p.yt));
+  const t=document.getElementById('italk');if(t)t.addEventListener('click',closeInfo);
+  iart.onclick=p.yt?()=>openLB(p.yt):null;
+  info.classList.add('open');document.body.style.overflow='hidden';ix.focus();
+}
+function closeInfo(){info.classList.remove('open');document.body.style.overflow=''}
+mplay.addEventListener('click',openInfo);
+ix.addEventListener('click',closeInfo);
+ibd.addEventListener('click',closeInfo);
 lbx.addEventListener('click',closeLB);
-addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)closeLB()});
+addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closeLB();else if(info.classList.contains('open'))closeInfo()});
 const pad=n=>String(n).padStart(2,'0');
 setInterval(()=>{
   const t=hero.classList.contains('has-video')?reel.currentTime:performance.now()/1000;
@@ -470,6 +534,17 @@ document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement
 
 
 </script>
+<aside class="info" id="info" aria-label="Informações do trabalho">
+  <div class="ibd" id="ibd"></div>
+  <div class="ipn" role="dialog" aria-modal="true" aria-labelledby="itit">
+    <div class="itop mono"><span id="imeta"></span><button class="pill ix" id="ix" type="button">Fechar ✕</button></div>
+    <button class="iart" id="iart" type="button" aria-label="Assistir vídeo"><span class="iplay">▶</span></button>
+    <h3 id="itit"></h3>
+    <p id="idesc"></p>
+    <dl id="idl"></dl>
+    <div class="iact" id="iact"></div>
+  </div>
+</aside>
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Showreel">
   <a class="pill lbyt" id="lbyt" target="_blank" rel="noopener">Abrir no YouTube</a>
   <button class="pill lbx" id="lbx" type="button">Fechar</button>
