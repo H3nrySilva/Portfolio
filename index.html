@@ -117,7 +117,7 @@ nav div{display:flex;gap:22px}
 
 /* CONTATO */
 .contato{background:var(--laranja);color:var(--cafe);padding-block:clamp(40px,6vw,90px) 26px}
-.contato .disp{font-size:clamp(60px,16vw,270px)}
+.contato .disp{font-size:clamp(52px,14vw,240px)}
 .crow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:40px;align-items:flex-end}
 .crow a.mail,.crow a.wpp{display:inline-flex;align-items:center;justify-content:center;width:clamp(64px,6vw,92px);height:clamp(64px,6vw,92px);border:2px solid var(--cafe);border-radius:50%;transition:background .25s,color .25s}
 .crow a.mail svg,.crow a.wpp svg{width:42%;height:42%}
@@ -181,7 +181,7 @@ nav div{display:flex;gap:22px}
 .title .L{display:block;position:relative;overflow:hidden;padding-top:.07em}
 
 /* TRABALHOS EM DESTAQUE — slider em tela cheia (referência Montra) */
-.mont{--ink:#E9D9C5;position:relative;min-height:max(100svh,680px);overflow:hidden;color:var(--ink);transition:color .8s;background:var(--cafe)}
+.mont{--ink:#E9D9C5;position:relative;min-height:max(100svh,760px);overflow:hidden;color:var(--ink);transition:color .8s;background:var(--cafe)}
 .mbgs,.mb{position:absolute;inset:0}
 .mb{background:var(--bg);opacity:0;transition:opacity 1s ease}
 .mb.photo{background-size:cover;background-position:center}
@@ -191,6 +191,12 @@ nav div{display:flex;gap:22px}
 .mb::before{content:"";position:absolute;left:50%;top:6%;width:min(52vw,640px);height:96%;transform:translateX(-50%);
  background:radial-gradient(21% 19% at 50% 22%,var(--sil) 97%,transparent 100%),radial-gradient(21% 30% at 56% 30%,var(--sil) 97%,transparent 100%),radial-gradient(48% 36% at 50% 98%,var(--sil) 97%,transparent 100%),radial-gradient(14% 22% at 50% 52%,var(--sil) 97%,transparent 100%);filter:blur(2px)}
 .mlabel{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:3;padding:9px 20px;border-radius:999px;background:rgba(20,10,6,.22);backdrop-filter:blur(8px);color:#E9D9C5;white-space:nowrap}
+.wd{display:inline-block;white-space:nowrap}
+@media (min-width:761px){.mhead .mh{white-space:nowrap}}
+.mhead{position:absolute;left:0;right:0;top:calc(60px + env(safe-area-inset-top,0px));z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;color:var(--ink);transition:color .8s}
+.mhead .mh{margin:0;font-size:clamp(40px,7.6vw,128px);line-height:.84;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(20,10,6,.18)}
+.mcount{padding-bottom:.6em;white-space:nowrap}
+@media (max-width:760px){.mhead .mh{font-size:clamp(36px,12.5vw,64px)}.mcount{display:none}}
 .mrow{position:absolute;left:0;right:0;bottom:calc(50% + 14px);z-index:2;display:flex;align-items:flex-end;gap:3vw}
 .mont .mtitle{flex:0 0 auto;margin:0;text-transform:none;font-weight:700;letter-spacing:-.045em;line-height:.88;font-size:clamp(42px,6.6vw,112px);transition:opacity .25s}
 .mmeta{flex:1;display:flex;justify-content:space-between;gap:16px;padding-bottom:.5em}
@@ -302,7 +308,7 @@ nav div{display:flex;gap:22px}
 
 <section class="mont" id="trabalhos" aria-label="Trabalhos em destaque">
   <div class="mbgs" id="mbgs" aria-hidden="true"></div>
-  <div class="mlabel"><span class="mono">Trabalhos em destaque</span></div>
+  <div class="mhead pad"><h2 class="disp play mh" style="--a:62;--b:80">Trabalhos em destaque</h2></div>
   <div class="mrow pad">
     <h2 class="disp play mtitle" id="ftitle">Amanda<br>crepúsculo</h2>
     <div class="mmeta mono"><span>Por Henrique Silva</span><span id="fcat">Fashion film</span><span id="fyear">2026</span><span>Brasil</span></div>
@@ -363,14 +369,16 @@ function play(el){
     [...node.childNodes].forEach(c=>{
       if(c.nodeType===3){
         const f=document.createDocumentFragment();
+        let w=null;
         [...c.textContent].forEach(ch=>{
-          if(ch===' '){const s=document.createElement('span');s.className='sp';f.append(s);return}
+          if(ch===' '){w=null;const s=document.createElement('span');s.className='sp';f.append(s);return}
+          if(!w){w=document.createElement('span');w.className='wd';f.append(w)}
           const s=document.createElement('span');s.className='lt';s.setAttribute('aria-hidden','true');
           const base=el.style.getPropertyValue('--a');
           const a=base?(+base):70+((n*47+13)%44);
           const b=base?(+el.style.getPropertyValue('--b')):183-a;
           s.style.setProperty('--a',a);s.style.setProperty('--b',b);s.style.setProperty('--i',n);
-          s.textContent=ch;f.append(s);n++;
+          s.textContent=ch;w.append(s);n++;
         });
         c.replaceWith(f);
       }else if(c.nodeType===1&&c.tagName!=='BR')walk(c);
