@@ -184,6 +184,9 @@ nav div{display:flex;gap:22px}
 .mont{--ink:#E9D9C5;position:relative;min-height:max(100svh,680px);overflow:hidden;color:var(--ink);transition:color .8s;background:var(--cafe)}
 .mbgs,.mb{position:absolute;inset:0}
 .mb{background:var(--bg);opacity:0;transition:opacity 1s ease}
+.mb.photo{background-size:cover;background-position:center}
+.mb.photo::before{display:none}
+.mb.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,21,15,.35),rgba(36,21,15,.1) 40%,rgba(36,21,15,.6))}
 .mb.on{opacity:1}
 .mb::before{content:"";position:absolute;left:50%;top:6%;width:min(52vw,640px);height:96%;transform:translateX(-50%);
  background:radial-gradient(21% 19% at 50% 22%,var(--sil) 97%,transparent 100%),radial-gradient(21% 30% at 56% 30%,var(--sil) 97%,transparent 100%),radial-gradient(48% 36% at 50% 98%,var(--sil) 97%,transparent 100%),radial-gradient(14% 22% at 50% 52%,var(--sil) 97%,transparent 100%);filter:blur(2px)}
@@ -336,6 +339,22 @@ nav div{display:flex;gap:22px}
   </div>
 </footer>
 
+<aside class="info" id="info" aria-label="Informações do trabalho">
+  <div class="ibd" id="ibd"></div>
+  <div class="ipn" role="dialog" aria-modal="true" aria-labelledby="itit">
+    <div class="itop mono"><span id="imeta"></span><button class="pill ix" id="ix" type="button">Fechar ✕</button></div>
+    <button class="iart" id="iart" type="button" aria-label="Assistir vídeo"><span class="iplay">▶</span></button>
+    <h3 id="itit"></h3>
+    <p id="idesc"></p>
+    <dl id="idl"></dl>
+    <div class="iact" id="iact"></div>
+  </div>
+</aside>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Showreel">
+  <a class="pill lbyt" id="lbyt" target="_blank" rel="noopener">Abrir no YouTube</a>
+  <button class="pill lbx" id="lbx" type="button">Fechar</button>
+  <div class="lbf" id="lbf"></div>
+</div>
 <script>
 /* divide em letras com duas larguras (wdth 62–125) que se invertem no hover */
 function play(el){
@@ -505,7 +524,7 @@ function openInfo(){
   itit.textContent=p.t.replace(/<br>/g,' ');
   idesc.textContent=x.d||'Descrição em breve.';
   idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||[]).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
-  iart.style.background=p.g;iart.classList.toggle('noplay',!p.yt);
+  iart.style.background=p.cover?'center/cover no-repeat url("'+p.cover+'")':p.g;iart.classList.toggle('noplay',!p.yt);
   iact.innerHTML=p.yt
     ?'<button class="pill solid" id="iwatch" type="button">▶ Assistir vídeo</button><a class="pill" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+p.yt+'">Abrir no YouTube</a>'
     :'<a class="pill solid" href="#contato" id="italk">Falar comigo</a>';
@@ -518,6 +537,24 @@ function closeInfo(){info.classList.remove('open');document.body.style.overflow=
 mplay.addEventListener('click',openInfo);
 ix.addEventListener('click',closeInfo);
 ibd.addEventListener('click',closeInfo);
+/* capa do vídeo (miniatura do YouTube) no fundo do slide, na tira e na aba de informações */
+function applyCover(i,url){
+  const p=PJ[i];p.cover=url;p.ink='#E9D9C5';
+  const bg=mbgs.children[i];bg.style.backgroundImage='url("'+url+'")';bg.classList.add('photo');
+  [...track.children].forEach((b,k)=>{if(k%N===i)b.style.background='center/cover no-repeat url("'+url+'")'});
+  if(cur===i){mont.style.setProperty('--ink',p.ink);if(info.classList.contains('open'))iart.style.background='center/cover no-repeat url("'+url+'")'}
+}
+PJ.forEach((p,i)=>{
+  if(!p.yt)return;
+  const urls=['maxresdefault','sddefault','hqdefault'].map(n=>'https://i.ytimg.com/vi/'+p.yt+'/'+n+'.jpg');
+  (function tryNext(k){
+    if(k>=urls.length)return;
+    const im=new Image();
+    im.onload=()=>{if(im.naturalWidth<200)tryNext(k+1);else applyCover(i,urls[k])};
+    im.onerror=()=>tryNext(k+1);
+    im.src=urls[k];
+  })(0);
+});
 lbx.addEventListener('click',closeLB);
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closeLB();else if(info.classList.contains('open'))closeInfo()});
 const pad=n=>String(n).padStart(2,'0');
@@ -534,21 +571,5 @@ document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement
 
 
 </script>
-<aside class="info" id="info" aria-label="Informações do trabalho">
-  <div class="ibd" id="ibd"></div>
-  <div class="ipn" role="dialog" aria-modal="true" aria-labelledby="itit">
-    <div class="itop mono"><span id="imeta"></span><button class="pill ix" id="ix" type="button">Fechar ✕</button></div>
-    <button class="iart" id="iart" type="button" aria-label="Assistir vídeo"><span class="iplay">▶</span></button>
-    <h3 id="itit"></h3>
-    <p id="idesc"></p>
-    <dl id="idl"></dl>
-    <div class="iact" id="iact"></div>
-  </div>
-</aside>
-<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Showreel">
-  <a class="pill lbyt" id="lbyt" target="_blank" rel="noopener">Abrir no YouTube</a>
-  <button class="pill lbx" id="lbx" type="button">Fechar</button>
-  <div class="lbf" id="lbf"></div>
-</div>
 </body>
 </html>
