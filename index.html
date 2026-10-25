@@ -191,6 +191,29 @@ nav div{display:flex;gap:22px}
 .mb::before{content:"";position:absolute;left:50%;top:6%;width:min(52vw,640px);height:96%;transform:translateX(-50%);
  background:radial-gradient(21% 19% at 50% 22%,var(--sil) 97%,transparent 100%),radial-gradient(21% 30% at 56% 30%,var(--sil) 97%,transparent 100%),radial-gradient(48% 36% at 50% 98%,var(--sil) 97%,transparent 100%),radial-gradient(14% 22% at 50% 52%,var(--sil) 97%,transparent 100%);filter:blur(2px)}
 .mlabel{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:3;padding:9px 20px;border-radius:999px;background:rgba(20,10,6,.22);backdrop-filter:blur(8px);color:#E9D9C5;white-space:nowrap}
+/* VER TUDO — todos os trabalhos */
+.arch{position:fixed;inset:0;z-index:64;background:var(--fundo);color:var(--bege);overflow-y:auto;visibility:hidden;transform:translateY(100%);transition:transform .8s cubic-bezier(.7,0,.2,1),visibility 0s .8s;padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+.arch.open{visibility:visible;transform:none;transition:transform .8s cubic-bezier(.7,0,.2,1),visibility 0s}
+.ahead{position:sticky;top:0;z-index:2;background:var(--fundo);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:16px;border-bottom:1px solid rgba(233,217,197,.25)}
+.ahead .disp{font-size:clamp(34px,7vw,112px);font-variation-settings:'wdth' 70;line-height:.86}
+.ahead .mono{display:block;margin-top:10px;color:var(--laranja)}
+.ax{color:var(--bege);flex:0 0 auto}
+.ax:hover{background:var(--bege);color:var(--cafe)}
+.afilt{display:flex;flex-wrap:wrap;gap:8px;padding-block:18px}
+.chip{border:1px solid rgba(233,217,197,.5);background:transparent;color:var(--bege);border-radius:999px;padding:7px 16px;font-family:var(--mono);font-size:11px;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s}
+.chip:hover,.chip.on{background:var(--bege);color:var(--cafe)}
+.agrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2vw,30px) clamp(10px,1.2vw,18px)}
+.ac{border:0;background:none;padding:0;text-align:left;color:inherit;cursor:pointer;display:block}
+.aart{position:relative;display:block;aspect-ratio:16/10;border-radius:3px;overflow:hidden;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.ac:hover .aart{transform:scale(.97)}
+.ak{position:absolute;top:8px;left:10px;right:10px;display:flex;justify-content:space-between;color:#E9D9C5;text-shadow:0 1px 8px rgba(20,10,6,.5)}
+.at{display:flex;flex-direction:column;gap:6px;padding-top:10px}
+.at b{font-weight:900;text-transform:uppercase;font-variation-settings:'wdth' 62;font-size:clamp(20px,2.2vw,34px);line-height:.95;transition:font-variation-settings .8s cubic-bezier(.45,0,.15,1)}
+.ac:hover .at b{font-variation-settings:'wdth' 100}
+.at span{color:var(--laranja);text-align:left}
+@media (max-width:1100px){.agrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.agrid{grid-template-columns:repeat(2,minmax(0,1fr))}.at{flex-direction:column;gap:4px}.at span{text-align:left}}
+@media (prefers-reduced-motion:reduce){.arch{transition:none!important}}
 .wd{display:inline-block;white-space:nowrap}
 @media (min-width:761px){.mhead .mh{white-space:nowrap}}
 .mhead{position:absolute;left:0;right:0;top:calc(60px + env(safe-area-inset-top,0px));z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;color:var(--ink);transition:color .8s}
@@ -316,7 +339,7 @@ nav div{display:flex;gap:22px}
   <div class="rail" id="rail" role="group" aria-label="Projetos"><div class="track" id="track"></div></div>
   <div class="mprog pad mono"><span id="pn">01</span><i><b id="pb"></b></i><span id="pt">06</span></div>
   <button class="pill mplay" id="mplay" type="button">+ Informações</button>
-  <a class="pill mall" href="#contato">Ver tudo</a>
+  <button class="pill mall" id="mall" type="button">Ver tudo</button>
 </section>
 
 <section class="sobre" id="sobre">
@@ -345,6 +368,11 @@ nav div{display:flex;gap:22px}
   </div>
 </footer>
 
+<section class="arch" id="arch" role="dialog" aria-modal="true" aria-label="Todos os trabalhos">
+  <div class="ahead pad"><div><h2 class="disp">Todos os trabalhos</h2><span class="mono" id="acount"></span></div><button class="pill ax" id="ax" type="button">Fechar ✕</button></div>
+  <div class="afilt pad" id="afilt"></div>
+  <div class="agrid pad" id="agrid"></div>
+</section>
 <aside class="info" id="info" aria-label="Informações do trabalho">
   <div class="ibd" id="ibd"></div>
   <div class="ipn" role="dialog" aria-modal="true" aria-labelledby="itit">
@@ -422,7 +450,10 @@ const T=document.getElementById('title');
 function fit(){
   T.style.fontSize='100px';
   const w=T.parentElement.clientWidth-parseFloat(getComputedStyle(T.parentElement).paddingInline)*2;
-  T.style.fontSize=(92*w/T.querySelector('.row1').offsetWidth)+'px';
+  const r1=T.querySelector('.row1'),r2=T.querySelector('.row2'),mob=innerWidth<=760;
+  r2.style.fontSize='';
+  T.style.fontSize=((mob?99:92)*w/r1.offsetWidth)+'px';
+  if(mob)r2.style.fontSize=(r1.offsetWidth/r2.offsetWidth)+'em';
   T.classList.add('ready');
 }
 (document.fonts?document.fonts.ready:Promise.resolve()).then(fit);
@@ -435,7 +466,20 @@ const PJ=[
  {t:"Bianca<br>Bottrel",c:"Vídeo educativo",y:"2026",yt:"fyfkdn2RsDQ",bg:"#E9D9C5",sil:"#38251F",ink:"#38251F",g:"linear-gradient(135deg,#e9d9c5,#5a3424)"},
  {t:"Título do<br>projeto",c:"Motion",y:"2025",bg:"#8a3f22",sil:"#1b0f0a",ink:"#E9D9C5",g:"linear-gradient(135deg,#9a4a2a,#1c0f0a)"},
  {t:"Título do<br>projeto",c:"Documentário",y:"2024",bg:"#24150f",sil:"#7a4a30",ink:"#E9D9C5",g:"linear-gradient(135deg,#b88a63,#2c1a12)"},
- {t:"Título do<br>projeto",c:"Institucional",y:"2024",bg:"#C66A40",sil:"#E9D9C5",ink:"#38251F",g:"linear-gradient(135deg,#d8bfa0,#38251f)"}
+ {t:"Título do<br>projeto",c:"Institucional",y:"2024",bg:"#C66A40",sil:"#E9D9C5",ink:"#38251F",g:"linear-gradient(135deg,#d8bfa0,#38251f)"},
+ {t:"Título do<br>projeto",c:"Videoclipe",y:"2024",bg:"#38251F",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c9a27c,#24150f)"},
+ {t:"Título do<br>projeto",c:"Fashion film",y:"2025",bg:"#E9D9C5",sil:"#8a3f22",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#8a3f22)"},
+ {t:"Título do<br>projeto",c:"Comercial",y:"2025",bg:"#8a3f22",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c66a40,#38251f)"},
+ {t:"Título do<br>projeto",c:"Motion",y:"2023",bg:"#24150f",sil:"#C66A40",ink:"#E9D9C5",g:"linear-gradient(135deg,#7a4a30,#140a06)"}
+];
+/* demais trabalhos: aparecem só em "Ver tudo" (os 10 acima são os favoritos do slider) */
+const EXTRA=[
+ {t:"Título do projeto",c:"Comercial",y:"2024",g:"linear-gradient(135deg,#b88a63,#38251f)"},
+ {t:"Título do projeto",c:"Fashion film",y:"2024",g:"linear-gradient(135deg,#e0a070,#5a3424)"},
+ {t:"Título do projeto",c:"Videoclipe",y:"2023",g:"linear-gradient(135deg,#9a4a2a,#24150f)"},
+ {t:"Título do projeto",c:"Documentário",y:"2023",g:"linear-gradient(135deg,#d8bfa0,#6b4a38)"},
+ {t:"Título do projeto",c:"Institucional",y:"2023",g:"linear-gradient(135deg,#c66a40,#2a1912)"},
+ {t:"Título do projeto",c:"Motion",y:"2022",g:"linear-gradient(135deg,#7a4a30,#1b0f0a)"}
 ];
 const N=PJ.length,SETS=5,HOME=2;
 const mont=document.getElementById('trabalhos'),tt=document.getElementById('ftitle');
@@ -489,7 +533,7 @@ addEventListener('resize',center);
 (document.fonts?document.fonts.ready:Promise.resolve()).then(center);
 addEventListener('keydown',e=>{
   if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
-  if(info.classList.contains('open'))return;
+  if(info.classList.contains('open')||arch.classList.contains('open'))return;
   const r=mont.getBoundingClientRect();
   if(r.top<innerHeight*.6&&r.bottom>innerHeight*.4)move(e.key==='ArrowRight'?1:-1);
 });
@@ -526,9 +570,9 @@ function closeLB(){lb.hidden=true;lbf.innerHTML=''}
 const INFO={
  2:{d:"Vídeo educativo publicado no canal de Bianca Bottrel. Explica de forma simples e direta como funciona um dos mercados que mais crescem no Brasil para quem cria conteúdo.",f:[["Cliente","Bianca Bottrel"],["Plataforma","YouTube"]]}
 };
-function openInfo(){
-  const p=PJ[cur],x=INFO[cur]||{};
-  imeta.textContent=String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0')+' · '+p.c;
+function openInfo(item){
+  const own=item&&item.t,p=own?item:PJ[cur],k=PJ.indexOf(p),x=p.info||INFO[k]||{};
+  imeta.textContent=(k>=0?String(k+1).padStart(2,'0')+' / '+String(N).padStart(2,'0'):'Arquivo')+' · '+p.c;
   itit.textContent=p.t.replace(/<br>/g,' ');
   idesc.textContent=x.d||'Descrição em breve.';
   idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||[]).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
@@ -541,10 +585,35 @@ function openInfo(){
   iart.onclick=p.yt?()=>openLB(p.yt):null;
   info.classList.add('open');document.body.style.overflow='hidden';ix.focus();
 }
-function closeInfo(){info.classList.remove('open');document.body.style.overflow=''}
+function closeInfo(){info.classList.remove('open');document.body.style.overflow=arch.classList.contains('open')?'hidden':''}
 mplay.addEventListener('click',openInfo);
 ix.addEventListener('click',closeInfo);
 ibd.addEventListener('click',closeInfo);
+/* ver tudo: lista de todos os trabalhos, com filtro por categoria */
+let filt='Todos';
+function buildArch(){
+  const all=PJ.concat(EXTRA);
+  const cats=['Todos'].concat([...new Set(all.map(x=>x.c))]);
+  afilt.innerHTML=cats.map(c=>'<button type="button" class="chip'+(c===filt?' on':'')+'" data-c="'+c+'">'+c+'</button>').join('');
+  const list=all.filter(x=>filt==='Todos'||x.c===filt);
+  acount.textContent='('+String(list.length).padStart(2,'0')+') trabalhos';
+  agrid.innerHTML='';
+  list.forEach(x=>{
+    const fav=PJ.indexOf(x)>=0,n=all.indexOf(x)+1;
+    const b=document.createElement('button');b.type='button';b.className='ac';
+    const art=document.createElement('span');art.className='aart';
+    art.style.background=x.cover?'center/cover no-repeat url("'+x.cover+'")':x.g;
+    art.innerHTML='<span class="ak mono"><span>'+String(n).padStart(2,'0')+'</span><span>'+(fav?'★ Destaque':'')+'</span></span>';
+    const at=document.createElement('span');at.className='at';
+    at.innerHTML='<b>'+x.t.replace(/<br>/g,' ')+'</b><span class="mono">'+x.c+' · '+x.y+'</span>';
+    b.append(art,at);b.addEventListener('click',()=>openInfo(x));agrid.append(b);
+  });
+}
+function openArch(){buildArch();arch.scrollTop=0;arch.classList.add('open');document.body.style.overflow='hidden';ax.focus()}
+function closeArch(){arch.classList.remove('open');document.body.style.overflow=''}
+afilt.addEventListener('click',e=>{const c=e.target.closest('.chip');if(c){filt=c.dataset.c;buildArch()}});
+mall.addEventListener('click',openArch);
+ax.addEventListener('click',closeArch);
 /* capa do vídeo (miniatura do YouTube) no fundo do slide, na tira e na aba de informações */
 function applyCover(i,url){
   const p=PJ[i];p.cover=url;p.ink='#E9D9C5';
@@ -564,7 +633,7 @@ PJ.forEach((p,i)=>{
   })(0);
 });
 lbx.addEventListener('click',closeLB);
-addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closeLB();else if(info.classList.contains('open'))closeInfo()});
+addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closeLB();else if(info.classList.contains('open'))closeInfo();else if(arch.classList.contains('open'))closeArch()});
 const pad=n=>String(n).padStart(2,'0');
 setInterval(()=>{
   const t=hero.classList.contains('has-video')?reel.currentTime:performance.now()/1000;
