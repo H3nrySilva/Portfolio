@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -271,6 +272,8 @@ nav div{display:flex;gap:22px}
   .mont .mtitle{font-size:clamp(38px,12vw,64px)}
   .rail{--w:clamp(104px,30vw,170px)}
 }
+.mont .mtitle.long{font-size:clamp(26px,3.6vw,60px);max-width:46vw;line-height:.95}
+@media (max-width:760px){.mont .mtitle.long{font-size:clamp(24px,7.5vw,40px);max-width:100%}}
 .track.nj,.track.nj .it{transition:none!important}
 @media (prefers-reduced-motion:reduce){.mb,.track,.it{transition:none!important}}
 
@@ -333,8 +336,8 @@ nav div{display:flex;gap:22px}
   <div class="mbgs" id="mbgs" aria-hidden="true"></div>
   <div class="mhead pad"><h2 class="disp play mh" style="--a:62;--b:80">Trabalhos em destaque</h2></div>
   <div class="mrow pad">
-    <h2 class="disp play mtitle" id="ftitle">Amanda<br>crepúsculo</h2>
-    <div class="mmeta mono"><span>Por Henrique Silva</span><span id="fcat">Fashion film</span><span id="fyear">2026</span><span>Brasil</span></div>
+    <h2 class="disp play mtitle" id="ftitle">Título do<br>projeto</h2>
+    <div class="mmeta mono"><span>Por Henrique Silva</span><span id="fcat">Vídeo</span><span id="fyear">2026</span><span>Brasil</span></div>
   </div>
   <div class="rail" id="rail" role="group" aria-label="Projetos"><div class="track" id="track"></div></div>
   <div class="mprog pad mono"><span id="pn">01</span><i><b id="pb"></b></i><span id="pt">06</span></div>
@@ -461,15 +464,15 @@ addEventListener('resize',fit);
 
 /* trabalhos em destaque: slider estilo Montra, em loop infinito */
 const PJ=[
- {t:"Amanda<br>crepúsculo",c:"Fashion film",y:"2026",bg:"#C66A40",sil:"#38251F",ink:"#E9D9C5",g:"linear-gradient(135deg,#e0a070,#3a1f14)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"saB_plhjfzA",bg:"#C66A40",sil:"#38251F",ink:"#E9D9C5",g:"linear-gradient(135deg,#e0a070,#3a1f14)"},
  {t:"Campanha<br>de marca",c:"Comercial",y:"2026",bg:"#38251F",sil:"#C66A40",ink:"#E9D9C5",g:"linear-gradient(135deg,#c66a40,#24150f)"},
  {t:"Bianca<br>Bottrel",c:"Vídeo educativo",y:"2026",yt:"fyfkdn2RsDQ",bg:"#E9D9C5",sil:"#38251F",ink:"#38251F",g:"linear-gradient(135deg,#e9d9c5,#5a3424)"},
- {t:"Título do<br>projeto",c:"Motion",y:"2025",bg:"#8a3f22",sil:"#1b0f0a",ink:"#E9D9C5",g:"linear-gradient(135deg,#9a4a2a,#1c0f0a)"},
- {t:"Título do<br>projeto",c:"Documentário",y:"2024",bg:"#24150f",sil:"#7a4a30",ink:"#E9D9C5",g:"linear-gradient(135deg,#b88a63,#2c1a12)"},
- {t:"Título do<br>projeto",c:"Institucional",y:"2024",bg:"#C66A40",sil:"#E9D9C5",ink:"#38251F",g:"linear-gradient(135deg,#d8bfa0,#38251f)"},
- {t:"Título do<br>projeto",c:"Videoclipe",y:"2024",bg:"#38251F",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c9a27c,#24150f)"},
- {t:"Título do<br>projeto",c:"Fashion film",y:"2025",bg:"#E9D9C5",sil:"#8a3f22",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#8a3f22)"},
- {t:"Título do<br>projeto",c:"Comercial",y:"2025",bg:"#8a3f22",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c66a40,#38251f)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"aif3A5zrR68",bg:"#8a3f22",sil:"#1b0f0a",ink:"#E9D9C5",g:"linear-gradient(135deg,#9a4a2a,#1c0f0a)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"IllqIrAcCpc",bg:"#24150f",sil:"#7a4a30",ink:"#E9D9C5",g:"linear-gradient(135deg,#b88a63,#2c1a12)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"6jDWH23rfsY",bg:"#C66A40",sil:"#E9D9C5",ink:"#38251F",g:"linear-gradient(135deg,#d8bfa0,#38251f)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"DBzjoPVHLAk",bg:"#38251F",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c9a27c,#24150f)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"OZ1F5sE7ZdU",bg:"#E9D9C5",sil:"#8a3f22",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#8a3f22)"},
+ {t:"Título do<br>projeto",c:"Vídeo",y:"2026",yt:"R0rG3oXXB0Y",bg:"#8a3f22",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c66a40,#38251f)"},
  {t:"Título do<br>projeto",c:"Motion",y:"2023",bg:"#24150f",sil:"#C66A40",ink:"#E9D9C5",g:"linear-gradient(135deg,#7a4a30,#140a06)"}
 ];
 /* demais trabalhos: aparecem só em "Ver tudo" (os 10 acima são os favoritos do slider) */
@@ -506,7 +509,7 @@ function center(){
 function mark(){[...track.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===pos))}
 function ui(first){
   const p=PJ[cur];
-  if(!first){tt.style.opacity=0;setTimeout(()=>{tt.innerHTML=p.t;play(tt);tt.style.opacity=1},220)}
+  if(!first){tt.style.opacity=0;setTimeout(()=>{tt.innerHTML=p.t;play(tt);tt.classList.toggle('long',!!p.long);tt.style.opacity=1},220)}
   fcat.textContent=p.c;fyear.textContent=p.y;
   mont.style.setProperty('--ink',p.ink);
   pn.textContent=String(cur+1).padStart(2,'0');
@@ -560,10 +563,12 @@ addEventListener('message',e=>{
   if(d&&d.info&&d.info.playerState===1&&!hero.classList.contains('has-video'))hero.classList.add('has-yt');
 });
 reel.addEventListener('loadeddata',()=>{hero.classList.add('has-video');hero.classList.remove('has-yt');ytbg.removeAttribute('src');reel.play().catch(()=>{})});
+const YTSTART={};
 function openLB(id){
   id=id||YT;
-  lbf.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="Vídeo" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-  lbyt.href=`https://www.youtube.com/watch?v=${id}`;lb.hidden=false;lbx.focus();
+  const st=YTSTART[id]?'&start='+YTSTART[id]:'';
+  lbf.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1${st}" title="Vídeo" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  lbyt.href=`https://www.youtube.com/watch?v=${id}`+(YTSTART[id]?'&t='+YTSTART[id]+'s':'');lb.hidden=false;lbx.focus();
 }
 function closeLB(){lb.hidden=true;lbf.innerHTML=''}
 /* painel de informações: abre ao clicar no trabalho já selecionado */
@@ -575,7 +580,7 @@ function openInfo(item){
   imeta.textContent=(k>=0?String(k+1).padStart(2,'0')+' / '+String(N).padStart(2,'0'):'Arquivo')+' · '+p.c;
   itit.textContent=p.t.replace(/<br>/g,' ');
   idesc.textContent=x.d||'Descrição em breve.';
-  idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||[]).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
+  idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||(p.author?[['Canal',p.author]]:[])).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
   iart.style.background=p.cover?'center/cover no-repeat url("'+p.cover+'")':p.g;iart.classList.toggle('noplay',!p.yt);
   iact.innerHTML=p.yt
     ?'<button class="pill solid" id="iwatch" type="button">▶ Assistir vídeo</button><a class="pill" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+p.yt+'">Abrir no YouTube</a>'
@@ -632,6 +637,29 @@ PJ.forEach((p,i)=>{
     im.src=urls[k];
   })(0);
 });
+/* título e canal puxados do YouTube (oEmbed) para todo trabalho que tem vídeo */
+function breakTitle(s){
+  s=s.trim();if(s.length<=14||!s.includes(' '))return s;
+  const mid=s.length/2;let best=-1;
+  for(let i=0;i<s.length;i++)if(s[i]===' '&&(best<0||Math.abs(i-mid)<Math.abs(best-mid)))best=i;
+  return s.slice(0,best)+'<br>'+s.slice(best+1);
+}
+function applyTitle(i,title,author){
+  const p=PJ[i];
+  p.author=author||p.author;
+  if(title&&!/\bugc\b/i.test(title)){p.t=breakTitle(title.replace(/</g,'&lt;'));p.plain=title}
+  const long=(p.plain||p.t.replace(/<br>/g,' ')).length>26;
+  p.long=long;
+  [...track.children].forEach((b,k)=>{if(k%N===i)b.setAttribute('aria-label',p.t.replace(/<br>/g,' '))});
+  if(cur===i){tt.innerHTML=p.t;play(tt);tt.classList.toggle('long',long)}
+}
+PJ.forEach((p,i)=>{
+  if(!p.yt)return;
+  fetch('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent('https://www.youtube.com/watch?v='+p.yt))
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>applyTitle(i,d.title,d.author_name))
+    .catch(()=>{});
+});
 lbx.addEventListener('click',closeLB);
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closeLB();else if(info.classList.contains('open'))closeInfo();else if(arch.classList.contains('open'))closeArch()});
 const pad=n=>String(n).padStart(2,'0');
@@ -650,3 +678,5 @@ document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement
 </script>
 </body>
 </html>
+
+</body></html>
