@@ -227,7 +227,12 @@ nav div{display:flex;gap:22px}
 .rail{position:absolute;left:0;right:0;top:50%;z-index:2;overflow:hidden;height:min(50%,calc(var(--w)*1.4 + 8px));--w:clamp(112px,15.5vw,236px);touch-action:pan-y}
 .track{display:flex;gap:4px;align-items:flex-start;transition:transform .95s cubic-bezier(.7,0,.2,1);will-change:transform;width:max-content}
 .it{flex:0 0 var(--w);width:var(--w);height:calc(var(--w)*.68);border:0;border-radius:4px;padding:0;cursor:pointer;position:relative;overflow:hidden;transition:height .95s cubic-bezier(.7,0,.2,1),filter .5s;filter:saturate(.85) brightness(.9)}
-.it[aria-pressed=true]{height:calc(var(--w)*1.4);filter:none}
+.it{flex:0 0 calc(var(--w)*1.35);width:calc(var(--w)*1.35);height:calc(var(--w)*.76);transition:height .95s cubic-bezier(.7,0,.2,1),width .95s cubic-bezier(.7,0,.2,1),flex-basis .95s cubic-bezier(.7,0,.2,1),filter .5s}
+.it[aria-pressed=true]{flex-basis:calc(var(--w)*1.8);width:calc(var(--w)*1.8);height:calc(var(--w)*1.01);filter:none}
+.it.v{flex-basis:calc(var(--w)*.62);width:calc(var(--w)*.62);height:calc(var(--w)*1.1)}
+.it.v[aria-pressed=true]{flex-basis:calc(var(--w)*.79);width:calc(var(--w)*.79);height:calc(var(--w)*1.4)}
+.it::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(27,15,10,.78) 0,rgba(27,15,10,0) 32%,rgba(27,15,10,0) 55%,rgba(27,15,10,.85) 100%)}
+.it span{z-index:1}
 .it:hover{filter:none}
 .it span{position:absolute;left:8px;bottom:6px;font-family:var(--mono);font-size:9px;color:#E9D9C5}
 .mprog{position:absolute;left:0;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:3;display:flex;align-items:center;gap:14px;color:var(--ink);transition:color .8s}
@@ -464,14 +469,14 @@ addEventListener('resize',fit);
 
 /* trabalhos em destaque: slider estilo Montra, em loop infinito */
 const PJ=[
- {t:"Ads - Amanda -<br>The Queens Labs",fixed:1,long:true,c:"Ads",y:"2026",yt:"saB_plhjfzA",bg:"#C66A40",sil:"#38251F",ink:"#E9D9C5",g:"linear-gradient(135deg,#e0a070,#3a1f14)"},
+ {t:"Ads - Amanda -<br>The Queens Labs",fixed:1,long:true,c:"Ads",y:"2026",v:1,yt:"saB_plhjfzA",bg:"#C66A40",sil:"#38251F",ink:"#E9D9C5",g:"linear-gradient(135deg,#e0a070,#3a1f14)"},
  {t:"O que é UGC -<br>Bianca Bottrel",fixed:1,long:true,c:"Vídeo educativo",y:"2026",yt:"fyfkdn2RsDQ",bg:"#E9D9C5",sil:"#38251F",ink:"#38251F",g:"linear-gradient(135deg,#e9d9c5,#5a3424)"},
  {t:"UGC em ação -<br>Bianca Bottrel",fixed:1,long:true,c:"Vídeo",y:"2026",yt:"aif3A5zrR68",bg:"#8a3f22",sil:"#1b0f0a",ink:"#E9D9C5",g:"linear-gradient(135deg,#9a4a2a,#1c0f0a)"},
  {t:"Por que investir em UGC -<br>Bianca Bottrel",fixed:1,long:true,c:"Vídeo",y:"2026",yt:"IllqIrAcCpc",bg:"#24150f",sil:"#7a4a30",ink:"#E9D9C5",g:"linear-gradient(135deg,#b88a63,#2c1a12)"},
  {t:"Vlog no Rio de Janeiro -<br>Bianca Bottrel",fixed:1,long:true,c:"Vídeo",y:"2026",yt:"DBzjoPVHLAk",bg:"#38251F",sil:"#E9D9C5",ink:"#E9D9C5",g:"linear-gradient(135deg,#c9a27c,#24150f)"},
- {t:"Terra Roxa - Prof. Percy -<br>Terra Negra",fixed:1,long:true,c:"Vídeo",y:"2025",yt:"OZ1F5sE7ZdU",bg:"#E9D9C5",sil:"#8a3f22",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#8a3f22)"},
+ {t:"Terra Roxa - Prof. Percy -<br>Terra Negra",fixed:1,long:true,c:"Vídeo",y:"2025",v:1,yt:"OZ1F5sE7ZdU",bg:"#E9D9C5",sil:"#8a3f22",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#8a3f22)"},
  {t:"VSL -<br>Bianca Bottrel",fixed:1,long:true,c:"Vídeo",y:"2026",yt:"_MqQ-8rm9nA",bg:"#38251F",sil:"#C66A40",ink:"#E9D9C5",g:"linear-gradient(135deg,#5a3a2e,#C66A40)"},
- {t:"Kilimanjaro -<br>Terra Negra",fixed:1,long:true,c:"Vídeo",y:"2025",yt:"rC-tXasVgY4",bg:"#E9D9C5",sil:"#C66A40",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#C66A40)"}
+ {t:"Kilimanjaro -<br>Terra Negra",fixed:1,long:true,c:"Vídeo",y:"2025",v:1,yt:"rC-tXasVgY4",bg:"#E9D9C5",sil:"#C66A40",ink:"#38251F",g:"linear-gradient(135deg,#f0e2cf,#C66A40)"}
 ];
 /* demais trabalhos: aparecem só em "Ver tudo" (os 10 acima são os favoritos do slider) */
 const EXTRA=[];
@@ -485,7 +490,7 @@ PJ.forEach((p,i)=>{
 /* a tira é repetida 5 vezes; ao parar, volta sem animação para a cópia do meio */
 for(let k=0;k<SETS*N;k++){
   const p=PJ[k%N],it=document.createElement('button');
-  it.className='it';it.type='button';it.style.background=p.g;
+  it.className='it'+(p.v?' v':'');it.type='button';it.style.background=p.g;
   it.setAttribute('aria-label',p.t.replace(/<br>/g,' '));
   if(k>=N*HOME&&k<N*(HOME+1)){}else it.setAttribute('tabindex','-1');
   it.innerHTML='<span>'+String(k%N+1).padStart(2,'0')+'</span>';
@@ -605,7 +610,7 @@ function buildArch(){
     const fav=PJ.indexOf(x)>=0,n=all.indexOf(x)+1;
     const b=document.createElement('button');b.type='button';b.className='ac';
     const art=document.createElement('span');art.className='aart';
-    art.style.background=x.cover?'center/cover no-repeat url("'+x.cover+'")':x.g;
+    art.style.background=x.thumb?'center/cover no-repeat url("'+x.thumb+'")':x.g;
     art.innerHTML='<span class="ak mono"><span>'+String(n).padStart(2,'0')+'</span><span>'+(fav?'★ Destaque':'')+'</span></span>';
     const at=document.createElement('span');at.className='at';
     at.innerHTML='<b>'+x.t.replace(/<br>/g,' ')+'</b><span class="mono">'+x.c+' · '+x.y+'</span>';
@@ -619,10 +624,8 @@ mall.addEventListener('click',openArch);
 ax.addEventListener('click',closeArch);
 /* capa do vídeo (miniatura do YouTube) no fundo do slide, na tira e na aba de informações */
 function applyCover(i,url){
-  const p=PJ[i];p.cover=url;p.ink='#E9D9C5';
-  const bg=mbgs.children[i];bg.style.backgroundImage='url("'+url+'")';bg.classList.add('photo');
+  const p=PJ[i];p.thumb=url;
   [...track.children].forEach((b,k)=>{if(k%N===i)b.style.background='center/cover no-repeat url("'+url+'")'});
-  if(cur===i){mont.style.setProperty('--ink',p.ink);if(info.classList.contains('open'))iart.style.background='center/cover no-repeat url("'+url+'")'}
 }
 /* capinhas: geradas em canvas (grão de filme, perfurações, título gigante) */
 const CAPA=[['#4a2a1e','#C66A40'],['#38251F','#8a3f22'],['#2b1812','#C66A40'],['#5a2f1d','#E9D9C5']];
@@ -651,6 +654,18 @@ function makeCover(p,i){
 }
 (document.fonts&&document.fonts.load?Promise.all([document.fonts.load('900 100px Archivo'),document.fonts.load('400 20px "Space Mono"')]).catch(()=>{}):Promise.resolve()).then(()=>{
   PJ.forEach((p,i)=>{try{applyCover(i,makeCover(p,i))}catch(e){}});
+});
+/* trecho do vídeo (miniatura real do YouTube) nas miniaturas, no formato de cada vídeo */
+PJ.forEach((p,i)=>{
+  if(!p.yt)return;
+  const urls=(p.v?['hqdefault','sddefault']:['maxresdefault','sddefault','hqdefault']).map(n=>'https://i.ytimg.com/vi/'+p.yt+'/'+n+'.jpg');
+  (function tryNext(k){
+    if(k>=urls.length)return;
+    const im=new Image();
+    im.onload=()=>{if(im.naturalWidth<200)tryNext(k+1);else applyCover(i,urls[k])};
+    im.onerror=()=>tryNext(k+1);
+    im.src=urls[k];
+  })(0);
 });
 /* título e canal puxados do YouTube (oEmbed) para todo trabalho que tem vídeo */
 function breakTitle(s){
