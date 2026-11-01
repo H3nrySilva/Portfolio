@@ -565,7 +565,13 @@ function closeLB(){lb.hidden=true;lbf.innerHTML=''}
 /* painel de informações: abre ao clicar no trabalho já selecionado */
 const INFO={
  0:{d:"Anúncios da campanha de Amanda para a The Queens Labs. Fiz a captação e a edição do vídeo.",f:[["Cliente","The Queens Labs"],["Atuação","Captação e edição"]]},
- 1:{d:"Vídeo educativo da Bianca Bottrel. Explica de forma simples e direta como funciona um dos mercados que mais crescem no Brasil para quem cria conteúdo.",f:[["Cliente","Bianca Bottrel"],["Plataforma","YouTube"]]}
+ 1:{d:"Vídeo educativo da Bianca Bottrel. Explica de forma simples e direta como funciona um dos mercados que mais crescem no Brasil para quem cria conteúdo.",f:[["Cliente","Bianca Bottrel"],["Plataforma","YouTube"]]},
+ 2:{f:[["Cliente","Bianca Bottrel"]]},
+ 3:{f:[["Cliente","Bianca Bottrel"]]},
+ 4:{f:[["Cliente","Bianca Bottrel"]]},
+ 5:{f:[["Cliente","Terra Negra"]]},
+ 6:{f:[["Cliente","Bianca Bottrel"]]},
+ 7:{f:[["Cliente","Terra Negra"]]}
 };
 function openInfo(item){
   const own=item&&item.t,p=own?item:PJ[cur],k=PJ.indexOf(p),x=p.info||INFO[k]||{};
