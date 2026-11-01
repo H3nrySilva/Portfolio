@@ -187,7 +187,9 @@ nav div{display:flex;gap:22px}
 .mb{background:var(--bg);opacity:0;transition:opacity 1s ease}
 .mb.photo{background-size:cover;background-position:center}
 .mb.photo::before{display:none}
-.mb.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,21,15,.35),rgba(36,21,15,.1) 40%,rgba(36,21,15,.6))}
+.mb .bl{position:absolute;inset:-6%;background:center/cover no-repeat;filter:blur(28px) brightness(.62)}
+.mb .sh{position:absolute;top:0;left:50%;height:100%;aspect-ratio:9/16;transform:translateX(-50%);background:center/cover no-repeat}
+.mb.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(27,15,10,.72),rgba(27,15,10,.08) 38%,rgba(27,15,10,.1) 55%,rgba(27,15,10,.82))}
 .mb.on{opacity:1}
 .mb::before{content:"";position:absolute;left:50%;top:6%;width:min(52vw,640px);height:96%;transform:translateX(-50%);
  background:radial-gradient(21% 19% at 50% 22%,var(--sil) 97%,transparent 100%),radial-gradient(21% 30% at 56% 30%,var(--sil) 97%,transparent 100%),radial-gradient(48% 36% at 50% 98%,var(--sil) 97%,transparent 100%),radial-gradient(14% 22% at 50% 52%,var(--sil) 97%,transparent 100%);filter:blur(2px)}
@@ -623,9 +625,16 @@ afilt.addEventListener('click',e=>{const c=e.target.closest('.chip');if(c){filt=
 mall.addEventListener('click',openArch);
 ax.addEventListener('click',closeArch);
 /* capa do vídeo (miniatura do YouTube) no fundo do slide, na tira e na aba de informações */
-function applyCover(i,url){
+function applyCover(i,url,real){
   const p=PJ[i];p.thumb=url;
   [...track.children].forEach((b,k)=>{if(k%N===i)b.style.background='center/cover no-repeat url("'+url+'")'});
+  /* fundo do slide: o próprio vídeo, no formato dele */
+  const bg=mbgs.children[i];bg.innerHTML='';bg.classList.add('photo');
+  if(real&&p.v){
+    bg.style.backgroundImage='none';
+    bg.innerHTML='<i class="bl" style="background-image:url(\''+url+'\')"></i><i class="sh" style="background-image:url(\''+url+'\')"></i>';
+  }else bg.style.backgroundImage='url("'+url+'")';
+  p.ink='#E9D9C5';if(cur===i)mont.style.setProperty('--ink',p.ink);
 }
 /* capinhas: geradas em canvas (grão de filme, perfurações, título gigante) */
 const CAPA=[['#4a2a1e','#C66A40'],['#38251F','#8a3f22'],['#2b1812','#C66A40'],['#5a2f1d','#E9D9C5']];
@@ -662,7 +671,7 @@ PJ.forEach((p,i)=>{
   (function tryNext(k){
     if(k>=urls.length)return;
     const im=new Image();
-    im.onload=()=>{if(im.naturalWidth<200)tryNext(k+1);else applyCover(i,urls[k])};
+    im.onload=()=>{if(im.naturalWidth<200)tryNext(k+1);else applyCover(i,urls[k],1)};
     im.onerror=()=>tryNext(k+1);
     im.src=urls[k];
   })(0);
