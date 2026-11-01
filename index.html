@@ -565,14 +565,14 @@ function closeLB(){lb.hidden=true;lbf.innerHTML=''}
 /* painel de informações: abre ao clicar no trabalho já selecionado */
 const INFO={
  0:{d:"Anúncios da campanha de Amanda para a The Queens Labs. Fiz a captação e a edição do vídeo.",f:[["Cliente","The Queens Labs"],["Atuação","Captação e edição"]]},
- 1:{d:"Vídeo educativo publicado no canal de Bianca Bottrel. Explica de forma simples e direta como funciona um dos mercados que mais crescem no Brasil para quem cria conteúdo.",f:[["Cliente","Bianca Bottrel"],["Plataforma","YouTube"]]}
+ 1:{d:"Vídeo educativo da Bianca Bottrel. Explica de forma simples e direta como funciona um dos mercados que mais crescem no Brasil para quem cria conteúdo.",f:[["Cliente","Bianca Bottrel"],["Plataforma","YouTube"]]}
 };
 function openInfo(item){
   const own=item&&item.t,p=own?item:PJ[cur],k=PJ.indexOf(p),x=p.info||INFO[k]||{};
   imeta.textContent=(k>=0?String(k+1).padStart(2,'0')+' / '+String(N).padStart(2,'0'):'Arquivo')+' · '+p.c;
   itit.textContent=p.t.replace(/<br>/g,' ');
   idesc.textContent=x.d||'Descrição em breve.';
-  idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||(p.author?[['Canal',p.author]]:[])).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
+  idl.innerHTML=[['Categoria',p.c],['Ano',p.y]].concat(x.f||[]).map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
   iart.style.background=p.cover?'center/cover no-repeat url("'+p.cover+'")':p.g;iart.classList.toggle('noplay',!p.yt);
   iact.innerHTML=p.yt
     ?'<button class="pill solid" id="iwatch" type="button">▶ Assistir vídeo</button><a class="pill" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+p.yt+'">Abrir no YouTube</a>'
